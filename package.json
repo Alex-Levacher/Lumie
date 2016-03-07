@@ -1,22 +1,30 @@
 {
-  "name": "express-controllers-loader",
-  "version": "1.0.0",
-  "description": "Easy way to create controllers with express",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "express",
-    "controller",
-    "MVC"
-  ],
-  "author": {
-    "name": "Alexandre Levacher"
-  },
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "_id": "express-controllers-loader@1.0.0",
-  "_shasum": "27673a46b722c89f5fefcf9c9abcb5802fc6248d",
-  "_from": "express-controllers-loader@*"
+    "name": "express-controllers-loader",
+    "version": "1.0.2",
+    "description": "Easy way to create controllers and API with express",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Alex-Levacher/express-controllers-loader"
+    },
+    "keywords": [
+        "express",
+        "controller",
+        "MVC",
+        "generator",
+        "models",
+        "API",
+        "REST"
+    ],
+    "author": {
+        "name": "Alexandre Levacher"
+    },
+    "license": "MIT",
+    "readmeFilename": "README.md",
+    "_id": "express-controllers-loader@1.0.0",
+    "_shasum": "27673a46b722c89f5fefcf9c9abcb5802fc6248d",
+    "_from": "express-controllers-loader@*"
 }
