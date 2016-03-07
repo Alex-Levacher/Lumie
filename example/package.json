@@ -1,0 +1,16 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node example.js"
+  },
+  "author": "Alex Levacher",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-controllers-loader": "^1.0.0"
+  }
+}
