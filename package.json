@@ -1,6 +1,6 @@
 {
     "name": "express-controllers-loader",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Easy way to create controllers and API with express",
     "main": "src/index.js",
     "scripts": {

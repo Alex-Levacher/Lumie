@@ -17,7 +17,7 @@ Route.prototype.create = function (app) {
         app[this.verb](JoinPathSlash(this.path), this.permissions(this.level), this.action);
         return;
     }
-    app[this.verb](this.path, this.action);
+    app[this.verb](JoinPathSlash(this.path), this.action);
 };
 
 Route.prototype.log = function (app) {
