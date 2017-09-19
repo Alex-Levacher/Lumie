@@ -1,5 +1,3 @@
-const escapeStringRegexp = require('escape-string-regexp');
-
 function Route(verb, func, level, path, permissions) {
     this.verb = verb;
     this.action = func;
