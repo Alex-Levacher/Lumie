@@ -1,13 +1,15 @@
+const checkPublic = (req, res, next) => next();
 
-function permissions(level) {
-    return function (req, res, next) {
-        if (level == 'public') return next();
-
-        if (level == 'member') {
-            if (req.user) return next();
-            return res.status(401).end();
-        }
+const checkMember = (req, res, next) => {
+    if (req.user) {
+        return next();
     }
-}
+    return res.status(401).end();
+};
 
-module.exports = permissions;
+const funcRefs = {
+    public: checkPublic,
+    member: checkMember
+};
+
+module.exports = level => (req, res, next) => funcRefs[level](req, res, next);
