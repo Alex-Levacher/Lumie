@@ -2,7 +2,7 @@
 - **Simple** - **express-controllers-loader** will help you to develop faster your controllers in order to make an API for example.
 - **Automatic** - **express-controllers-loader** will read all the controllers you have created in an specific folder in order to create the routes associated.  
 **Important :** The name of the route will be the name of the model controllers. Activate the verbose option in the initialization to print the route name.
-- **Clear** - The definition of the controllers is really clear and this is the force of this module. All the controllers are nodes_modules.
+- **Clear** - The definition of the controllers is really clear and this is the force of this module. All the controllers are modules.
 
 ## Installation
 
@@ -96,4 +96,3 @@ module.exports = permissions;
 ```
 
 If you have any questions or feedbacks, feel free to contact me at : **levacher.alex@gmail.com**  
-This module was developed for **[Luncher.fr](http://luncher.fr)**  
