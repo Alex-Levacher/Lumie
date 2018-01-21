@@ -7,9 +7,9 @@ const checkMember = (req, res, next) => {
     return res.status(401).end();
 };
 
-const funcRefs = {
+const levelRefs = {
     public: checkPublic,
     member: checkMember
 };
 
-module.exports = level => (req, res, next) => funcRefs[level](req, res, next);
+module.exports = level => (req, res, next) => levelRefs[level](req, res, next);

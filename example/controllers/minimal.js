@@ -1,14 +1,14 @@
 
 const index = function (req, res) {
-    res.json({ data: 'I am a minimal implementation' });
+    res.json({ msg: 'I am a minimal implementation' });
 };
 
 const number = function (req, res) {
-    res.json({ data: `The number is ${req.params.value}` });
+    res.json({ msg: `The number is ${req.params.value}` });
 };
 
 const tiny = function (req, res) {
-    res.json({ data: "You can't do easier" });
+    res.json({ msg: "You can't do easier" });
 };
 
 module.exports = {

@@ -15,14 +15,18 @@ app.use((req, res, next) => {
 });
 
 expressCtrl.load(app, {
-    verbose: true,
+    verbose: process.env.NODE_ENV !== 'test',
     preURL: 'api',
-    ignore: ['*.specs', '*.actions'],
+    ignore: ['*.spec', '*.actions'],
     permissions,
     controllers_path: path.join(__dirname, 'controllers')
 });
 
 const server = app.listen(3000, '127.0.0.1', () => {
     const { address, port } = server.address();
-    console.log('Example app listening at http://%s:%s', address, port);
+    if (process.env.NODE_ENV !== 'test') {
+        console.log('Example app listening at http://%s:%s', address, port);
+    }
 });
+
+module.exports = server;
