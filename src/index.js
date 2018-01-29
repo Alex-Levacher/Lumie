@@ -1,132 +1,104 @@
-// Core module
 const fs = require('fs');
 const cpath = require('path');
 const mm = require('micromatch');
 
 const Route = require('./route');
+const validators = require('./validators');
+const { capitalize, Logger } = require('./helpers');
 
-let _verbose = true;
-let _app = null;
-let _controllersPath = null;
-let _routes = {};
-let _preURL = null;
-let _bluePrint = false;
-let _models = null;
-let _permissions = null;
-let _ignore = [];
+const logger = new Logger();
+const _routes = {};
+const _options = {};
 
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function camelize(str) {
-    return str.replace(/(?:^\w|[A-Z]|\b\w)/g, letter => letter.toUpperCase()).replace(/\s|[-.]+/g, '');
-}
-
-function browseControllerObject(controller, path, ctrlName) {
+function browseControllerObject(ctrlDefinition, path) {
     let routeSlug = null;
 
-    const keyName = path
-    .split('/')
-    .filter(item => (item && item !== _preURL))
+    const keyName = path.split('/')
+    .filter(item => (item && item !== _options.preURL))
     .map(item => capitalize(item))
     .join(' > ');
 
     _routes[keyName] = {};
-    if (_bluePrint && controller.generator) {
-        const model = _models.getModel(camelize(ctrlName));
-        browseControllerObject(_bluePrint(model), path, ctrlName);
-    }
-    for (const actionName in controller) {
+    for (const actionName in ctrlDefinition) {
         if (actionName === 'rename') break;
-        const action = controller[actionName];
+        const action = ctrlDefinition[actionName];
         for (const verbName in action) {
             let route = null;
-            routeSlug = cpath.join(verbName, path, actionName);
             if (typeof action[verbName] === 'function') {
-                route = new Route(
-                    verbName,
-                    action[verbName],
-                    null,
-                    cpath.join(path, actionName),
-                    null
-                );
+                route = new Route({
+                    verb: verbName,
+                    action: action[verbName],
+                    level: null,
+                    path: cpath.join(path, actionName),
+                    permissions: null
+                });
             } else {
-                route = new Route(
-                    verbName,
-                    action[verbName].action,
-                    action[verbName].level,
-                    cpath.join(path, actionName),
-                    _permissions,
-                    action[verbName].middlewares
-                );
+                route = new Route({
+                    verb: verbName,
+                    action: action[verbName].action,
+                    level: action[verbName].level,
+                    path: cpath.join(path, actionName),
+                    permissions: _options.permissions,
+                    middlewares: action[verbName].middlewares
+                });
             }
+            routeSlug = cpath.join(verbName, path, actionName);
             _routes[keyName][routeSlug] = route;
         }
     }
 }
 
-function browseFolder(app, filePath, fake) {
+function browseDirectory(filePath, urlPath) {
     fs.readdirSync(filePath)
     .forEach((file) => {
-        if (file.indexOf('.js') === -1) {
-            browseFolder(app, cpath.join(filePath, file), cpath.join(fake, file));
-        } else {
-            const realCtrlName = file.substr(0, file.length - 3);
-            let finalCtrlName = realCtrlName;
-            let concerned = false;
-
-            if (_ignore && _ignore.length) {
-                concerned = mm.isMatch(realCtrlName, _ignore);
-            }
-            if (concerned) return;
-            const controller = require(cpath.join(filePath, realCtrlName));
-            if (controller.rename !== undefined) {
-                finalCtrlName = controller.rename;
-            }
-            const path = cpath.join('/', _preURL, fake, finalCtrlName);
-            browseControllerObject(controller, path, finalCtrlName);
+        const curtFilePath = cpath.join(filePath, file);
+        const stats = fs.statSync(curtFilePath);
+        if (stats.isDirectory()) {
+            return browseDirectory(curtFilePath, cpath.join(urlPath, file));
         }
+        let realCtrlName = file.substr(0, file.length - 3);
+        if (_options.ignore && _options.ignore.length) {
+            const match = mm.isMatch(realCtrlName, _options.ignore);
+            if (match) return false;
+        }
+        const controller = require(cpath.join(filePath, realCtrlName));
+        if (controller.rename !== undefined) {
+            realCtrlName = controller.rename;
+        }
+        const path = cpath.join('/', _options.preURL, urlPath, realCtrlName);
+        return browseControllerObject(controller, path);
     });
 }
 
-function generateRoutes() {
+function generateRoutes(app) {
     for (const i in _routes) {
-        if (_verbose) {
-            console.log(`\n[${i}]`);
-        }
+        logger.log(`\n[${i}]`);
         for (const j in _routes[i]) {
-            if (_verbose) {
-                _routes[i][j].log();
-            }
-            _routes[i][j].create(_app);
+            logger.log(_routes[i][j]);
+            _routes[i][j].create(app);
         }
     }
 }
 
-module.exports.load = function (app, options) {
+module.exports.load = function (app, options = {}) {
     if (!app) {
-        throw new TypeError('Expected a express app in first argument');
+        throw new Error('Expected an express app as first argument');
     }
-    _app = app;
-    if (!options.controllers_path || typeof options.controllers_path !== 'string') {
-        throw new TypeError('Expected a controllers path in options');
+
+    const initOptionsFcts = {
+        controllers_path: validators.ctrlsPath,
+        verbose: validators.verbose,
+        ignore: validators.ignore,
+        preURL: validators.preURL,
+        permissions: validators.permissions
+    };
+
+    for (const key in initOptionsFcts) {
+        initOptionsFcts[key](options[key], _options);
     }
-    if (options) {
-        _verbose = options.verbose || false;
-        _controllersPath = options.controllers_path;
-        _preURL = options.preURL;
-        _ignore = options.ignore;
-        if (options.bluePrint) {
-            _bluePrint = options.bluePrint.functions || false;
-            _models = options.bluePrint.models || false;
-        }
-        _permissions = options.permissions || null;
-    }
-    if (_verbose) console.log('\n======== ROUTES ========');
-    browseFolder(app, cpath.join(_controllersPath), '/');
-    generateRoutes();
-    if (_verbose) console.log('\n========================');
-    _routes = undefined;
+    logger.verbose = _options.verbose;
+    logger.log('\n======== ROUTES ========');
+    browseDirectory(cpath.join(_options.controllersPath), '/');
+    generateRoutes(app);
+    logger.log('\n========================');
 };

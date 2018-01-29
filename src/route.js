@@ -1,31 +1,31 @@
-function Route(verb, func, level, path, permissions, middlewares = []) {
-    this.verb = verb;
-    this.action = func;
-    this.level = level;
-    this.path = path;
-    this.permissions = permissions;
-    this.middlewares = middlewares;
-}
+const { JoinPathSlash } = require('./helpers');
 
-function JoinPathSlash(path) {
-    return path.replace(/\\/g, '/');
-}
-
-Route.prototype.create = function (app) {
-    if (this.permissions) {
-        app[this.verb](
-            JoinPathSlash(this.path),
-            this.permissions(this.level),
-            this.middlewares,
-            this.action
-        );
-        return;
+class Route {
+    constructor(options) {
+        this.verb = options.verb;
+        this.action = options.action;
+        this.level = options.level;
+        this.path = options.path;
+        this.permissions = options.permissions;
+        this.middlewares = options.middlewares || [];
     }
-    app[this.verb](JoinPathSlash(this.path), this.middlewares, this.action);
-};
 
-Route.prototype.log = function () {
-    console.log(`\t${this.level}\t${this.verb}\t[${JoinPathSlash(this.path)}]`);
-};
+    create(app) {
+        if (this.permissions) {
+            app[this.verb](
+                JoinPathSlash(this.path),
+                this.permissions(this.level),
+                this.middlewares,
+                this.action
+            );
+            return;
+        }
+        app[this.verb](JoinPathSlash(this.path), this.middlewares, this.action);
+    }
+
+    inspect() {
+        return `\t${this.level}\t${this.verb}\t[${JoinPathSlash(this.path)}]`;
+    }
+}
 
 module.exports = Route;
