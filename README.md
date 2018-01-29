@@ -94,5 +94,3 @@ function permissions(level) {
 module.exports = permissions;
 
 ```
-
-If you have any questions or feedbacks, feel free to contact me at : **levacher.alex@gmail.com**  
