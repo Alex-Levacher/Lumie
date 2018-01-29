@@ -2,10 +2,10 @@
     "name": "example",
     "version": "1.0.0",
     "description": "",
-    "main": "example.js",
+    "main": "app.js",
     "scripts": {
         "test": "cross-env NODE_ENV='test' ava",
-        "start": "node example.js"
+        "start": "node app.js"
     },
     "author": "Alex Levacher",
     "license": "ISC",

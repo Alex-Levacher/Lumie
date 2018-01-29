@@ -4,7 +4,7 @@
     "description": "Easy way to create controllers and API with express",
     "main": "src/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "ava"
     },
     "repository": {
         "type": "git",
@@ -28,6 +28,7 @@
     "_shasum": "27673a46b722c89f5fefcf9c9abcb5802fc6248d",
     "_from": "express-controllers-loader@*",
     "dependencies": {
+        "express": "^4.16.2",
         "micromatch": "^3.1.4"
     },
     "devDependencies": {
@@ -35,6 +36,17 @@
         "eslint-config-airbnb": "^16.1.0",
         "eslint-plugin-import": "^2.8.0",
         "eslint-plugin-jsx-a11y": "^6.0.2",
-        "eslint-plugin-react": "^7.4.0"
+        "eslint-plugin-react": "^7.4.0",
+        "ava": "^0.24.0"
+    },
+    "ava": {
+        "files": [
+            "test/**/*.spec.js"
+        ],
+        "source": [
+            "src/**/*.js"
+        ],
+        "verbose": true,
+        "concurrency": 1
     }
 }
