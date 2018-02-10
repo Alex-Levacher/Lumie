@@ -9,10 +9,10 @@ const app = express();
 ** When the following code is commented, the route: /api/minimal/number/:value
 ** should return a 401 error because a user is not logged
 * */
-app.use((req, res, next) => {
-    req.user = {};
-    next();
-});
+// app.use((req, res, next) => {
+//     req.user = {};
+//     next();
+// });
 
 expressCtrl.load(app, {
     verbose: process.env.NODE_ENV !== 'test',
@@ -29,4 +29,4 @@ const server = app.listen(3000, '127.0.0.1', () => {
     }
 });
 
-module.exports = server;
+module.exports = app;

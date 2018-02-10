@@ -1,7 +1,7 @@
 ## What is express-controllers-loader ?
-- **Simple** - **express-controllers-loader** will help you to develop faster your controllers in order to make an API for example.
-- **Automatic** - **express-controllers-loader** will read all the controllers you have created in an specific folder in order to create the routes associated.  
-**Important :** The name of the route will be the name of the model controllers. Activate the verbose option in the initialization to print the route name.
+- **Simple** - **express-controllers-loader** will help you to develop faster your controllers and maintain a clean architechture.
+- **Automatic** - **express-controllers-loader** will read all the controllers you have created in an specific folder and create the associated routes.  
+**Important :** By default The name of the route will be the filename.
 - **Clear** - The definition of the controllers is really clear and this is the force of this module. All the controllers are modules.
 
 ## Installation
@@ -16,7 +16,6 @@ This file will give you a taste of what **express-controllers-loader does**.
 The following code will create the routes :
 * `get` &nbsp;&nbsp;`/users`
 * `post` `/users`
-* `get` &nbsp;&nbsp;`/users/:id`
 
 ```js
 var getUsers = function (req, res) {
@@ -27,17 +26,16 @@ var addUser = function (req, res) {
     // ...
 };
 
-var getUser = function (req, res) {
-    // ...
-};
-
 module.exports = {
     '/': {
-        get: getUsers,
-        post: addUser
-    },
-    '/:id': {
-        get: getUser
+        get: {
+            action: getUsers,
+            level: 'public'
+        },
+        post: {
+            action: addUser,
+            level: 'public'
+        }
     }
 }
 
@@ -58,10 +56,11 @@ var permissions = require('./permissions')
 var app = express();
 
 expressCtrl.load(app, {
-    verbose : true,
-    preURL : '/v1',
-    permissions: permissions,
-    controllers_path : path.join(__dirname, 'controllers')
+    verbose: process.env.NODE_ENV !== 'test',
+    preURL: 'api',
+    ignore: ['*.spec', '*.actions'],
+    permissions,
+    controllers_path: path.join(__dirname, 'controllers')
 });
 
 ```
@@ -70,27 +69,21 @@ expressCtrl.load(app, {
 
 * **verbose** :  `bool`. Will print or not the routes name in the console.  
 * **preURL** : `string`. Add a preURL to add a version number for example to your path.
+* **ignore** : `String[]`. The module will not try to find a route configuration in those files.
 * **permissions** : `function`. It's a middleware of the express route.
 * **controllers_path** : `string`. The path of your controllers folder.  
-It's required field, because without this information, the module can't read your controllers.
+It's a required field, because without this information, the module can't read your controllers.
 
 ## Sample `permissions.js`
 
-It's not required to use permissions if you want that all your routes become `public`
 
 ```js
 
-function permissions(level) {
-    return function (req, res, next) {
-        if (level == 'public') return next();
+const levelFcts = {
+    public: (req, res, next) => next(),
+    member: (req, res, next) => (req.user ? next() : res.sendStatus(401))
+};
 
-        if (level == 'member') {
-            if (req.user) return next();
-            return res.status(401).end();
-        }
-    }
-}
-
-module.exports = permissions;
+module.exports = level => (req, res, next) => levelFcts[level](req, res, next);
 
 ```

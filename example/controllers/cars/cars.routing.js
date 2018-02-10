@@ -4,7 +4,7 @@ const getCars = require('./get-cars.actions');
 module.exports = {
     '/': {
         post: {
-            middlewares: postCars.middlewares, // optional
+            middlewares: postCars.middlewares,
             action: postCars.action,
             level: 'public'
         },

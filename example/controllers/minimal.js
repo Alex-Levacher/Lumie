@@ -1,14 +1,10 @@
 
-const index = function (req, res) {
+const index = (req, res) => {
     res.json({ msg: 'I am a minimal implementation' });
 };
 
-const number = function (req, res) {
+const number = (req, res) => {
     res.json({ msg: `The number is ${req.params.value}` });
-};
-
-const tiny = function (req, res) {
-    res.json({ msg: "You can't do easier" });
 };
 
 module.exports = {
@@ -23,8 +19,5 @@ module.exports = {
             action: number,
             level: 'member'
         }
-    },
-    '/tiny': {
-        get: tiny
     }
 };

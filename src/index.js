@@ -2,11 +2,11 @@ const fs = require('fs');
 const cpath = require('path');
 const mm = require('micromatch');
 
-const Route = require('./route');
+const Route = require('./Route');
+const logger = require('./logger');
 const validators = require('./validators');
-const { capitalize, Logger } = require('./helpers');
+const { capitalize } = require('./helpers');
 
-const logger = new Logger();
 const _routes = {};
 const _options = {};
 
@@ -23,27 +23,15 @@ function browseControllerObject(ctrlDefinition, path) {
         if (actionName === 'rename') break;
         const action = ctrlDefinition[actionName];
         for (const verbName in action) {
-            let route = null;
-            if (typeof action[verbName] === 'function') {
-                route = new Route({
-                    verb: verbName,
-                    action: action[verbName],
-                    level: null,
-                    path: cpath.join(path, actionName),
-                    permissions: null
-                });
-            } else {
-                route = new Route({
-                    verb: verbName,
-                    action: action[verbName].action,
-                    level: action[verbName].level,
-                    path: cpath.join(path, actionName),
-                    permissions: _options.permissions,
-                    middlewares: action[verbName].middlewares
-                });
-            }
             routeSlug = cpath.join(verbName, path, actionName);
-            _routes[keyName][routeSlug] = route;
+            _routes[keyName][routeSlug] = new Route({
+                verb: verbName,
+                action: action[verbName].action,
+                level: action[verbName].level,
+                path: cpath.join(path, actionName),
+                permissions: _options.permissions,
+                middlewares: action[verbName].middlewares
+            });
         }
     }
 }
