@@ -20,7 +20,7 @@ function browseControllerObject(ctrlDefinition, path) {
 
     _routes[keyName] = {};
     for (const actionName in ctrlDefinition) {
-        if (actionName === 'rename') break;
+        if (actionName === 'path') break;
         const action = ctrlDefinition[actionName];
         for (const verbName in action) {
             routeSlug = cpath.join(verbName, path, actionName);
@@ -49,9 +49,15 @@ function browseDirectory(filePath, urlPath) {
             const match = mm.isMatch(realCtrlName, _options.ignore);
             if (match) return false;
         }
+
+        /* eslint global-require: 0 */
         const controller = require(cpath.join(filePath, realCtrlName));
-        if (controller.rename !== undefined) {
-            realCtrlName = controller.rename;
+
+        if (_options.routingFiles && mm.isMatch(realCtrlName, _options.routingFiles)) {
+            realCtrlName = '';
+        }
+        if (controller.path) {
+            realCtrlName = controller.path;
         }
         const path = cpath.join('/', _options.preURL, urlPath, realCtrlName);
         return browseControllerObject(controller, path);
@@ -78,12 +84,14 @@ module.exports.load = function (app, options = {}) {
         verbose: validators.verbose,
         ignore: validators.ignore,
         preURL: validators.preURL,
-        permissions: validators.permissions
+        permissions: validators.permissions,
+        routingFiles: validators.routingFiles
     };
 
     for (const key in initOptionsFcts) {
         initOptionsFcts[key](options[key], _options);
     }
+
     logger.verbose = _options.verbose;
     logger.log('\n======== ROUTES ========');
     browseDirectory(cpath.join(_options.controllersPath), '/');

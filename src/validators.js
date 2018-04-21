@@ -36,10 +36,18 @@ function permissions(value, options) {
     options.permissions = value;
 }
 
+function routingFiles(value = '*.routing', options) {
+    if (value && typeof value !== 'string') {
+        throw new Error('Expected routingFiles to be a string');
+    }
+    options.routingFiles = value;
+}
+
 module.exports = {
     ctrlsPath,
     verbose,
     ignore,
     preURL,
-    permissions
+    permissions,
+    routingFiles
 };
