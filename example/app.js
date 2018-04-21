@@ -25,7 +25,7 @@ expressCtrl.load(app, {
 const server = app.listen(3000, '127.0.0.1', () => {
     const { address, port } = server.address();
     if (process.env.NODE_ENV !== 'test') {
-        console.log('Example app listening at http://%s:%s', address, port);
+        console.log('Example app listening at http://%s:%s', address, port); /* eslint no-console: 0 */
     }
 });
 

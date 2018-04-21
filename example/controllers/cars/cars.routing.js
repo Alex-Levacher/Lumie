@@ -1,4 +1,4 @@
-const postCars = require('./post-cars.actions');
+const postCars = require('./create-cars.actions');
 const getCars = require('./get-cars.actions');
 
 module.exports = {
@@ -18,6 +18,5 @@ module.exports = {
             action: getCars.getOne,
             level: 'public'
         }
-    },
-    rename: ''
+    }
 };
