@@ -4,7 +4,9 @@
     "description": "Easy way to create controllers with express",
     "main": "src/index.js",
     "scripts": {
-        "test": "ava"
+        "test": "nyc ava -v",
+        "lint": "eslint src/",
+        "ava": "ava"
     },
     "repository": {
         "type": "git",
@@ -28,16 +30,18 @@
     "_shasum": "27673a46b722c89f5fefcf9c9abcb5802fc6248d",
     "_from": "express-controllers-loader@*",
     "dependencies": {
-        "express": "^4.16.2",
-        "micromatch": "^3.1.4"
+        "express": "^4.16.3",
+        "micromatch": "^3.1.10"
     },
     "devDependencies": {
-        "eslint": "^4.11.0",
+        "ava": "^0.25.0",
+        "eslint": "^4.19.1",
         "eslint-config-airbnb": "^16.1.0",
-        "eslint-plugin-import": "^2.8.0",
-        "eslint-plugin-jsx-a11y": "^6.0.2",
-        "eslint-plugin-react": "^7.4.0",
-        "ava": "^0.24.0"
+        "eslint-plugin-import": "^2.11.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.7.0",
+        "nyc": "^11.7.1",
+        "pre-commit": "^1.2.2"
     },
     "ava": {
         "files": [
@@ -48,5 +52,9 @@
         ],
         "verbose": true,
         "concurrency": 1
-    }
+    },
+    "pre-commit": [
+        "lint",
+        "test"
+    ]
 }
