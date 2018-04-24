@@ -17,7 +17,7 @@ const app = express();
 expressCtrl.load(app, {
     verbose: process.env.NODE_ENV !== 'test',
     preURL: 'api',
-    ignore: ['*.spec', '*.actions'],
+    ignore: ['*.spec', '*.action'],
     permissions,
     controllers_path: path.join(__dirname, 'controllers')
 });
