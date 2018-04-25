@@ -49,17 +49,34 @@ app.listen(3000, '127.0.0.1', () => {
 | **controllers_path** | `string` | `path.join(__dirname, 'controllers')` |The path of your controllers folder.|
 | **permissions** | `function` | `null` |A function that takes in parameter a **level access** and returns an [**express middleware**](https://expressjs.com/en/guide/using-middleware.html). This is useful if you want to restrict access for some urls. With this option enabled, you will be able to set in each route configuration an option level that will be passed to your permission function. See below to view who to implement it. [( example )](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/permissions.js)|
 
+## 🌲FILE STRUCTURE
+```txt
+project/
+├── controllers/
+│   ├── user/
+│   │   ├── user.routing.js
+│   │   ├── user.action.js
+│   │   └── user.spec.js
+│   ├── car/
+│   │   ├── car.routing.js
+│   │   ├── car.spec.js
+|   |   ├── car-get.action.js
+│   │   └── car-post.action.js
+│   └── simple-ctrl.js
+├── core/
+│   └── permissions.js
+├── app.js
+└── package.json
+```
+
+![alt text](https://raw.githubusercontent.com/Alex-Levacher/express-controllers-loader/master/images/preview-run.png)
+
 
 ## 🎮 USAGE
 
 ```js
-
-/**
-* user.routing.js
-*/
-
-const postCars = require('./createCar.actions');
-const getCars = require('./getCars.actions');
+const postCars = require('./car-post.action');
+const getCars = require('./car-get.action');
 
 module.exports = {
     '/': {
@@ -80,6 +97,7 @@ module.exports = {
         }
     }
 };
+
 ```
 
 ```
