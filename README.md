@@ -45,7 +45,7 @@ app.listen(3000, '127.0.0.1', () => {
 |--  |--  |--           |--         |
 | **verbose** | `boolean` | `true` |Will print or not the routes name in the console|
 | **preURL** | `string` | `null` |Suffix your routes urls|
-| **ignore** | `string[]` | `true` |The module will not try to find a routing definition in those files.|
+| **ignore** | `string[]` | `null` |The module will not try to find a routing definition in those files.|
 | **controllers_path** | `string` | `path.join(__dirname, 'controllers')` |The path of your controllers folder.|
 | **permissions** | `function` | `null` |A function that takes in parameter a **level access** and returns an [**express middleware**](https://expressjs.com/en/guide/using-middleware.html). This is useful if you want to restrict access for some urls. With this option enabled, you will be able to set in each route configuration an option level that will be passed to your permission function. See below to view who to implement it. [( example )](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/permissions.js)|
 
@@ -73,6 +73,8 @@ project/
 
 
 ## 🎮 USAGE
+
+### Example: project/controllers/users.js
 
 ```js
 const postCars = require('./car-post.action');
@@ -111,7 +113,15 @@ module.exports = {
 ```
 
 ## 🌠 BEST PRACTICES
-It is recommended to separate your routing definition file from your action functions as we see in the usage above.
+There is **2** common way to create a controller with ECL, you can take a look [here](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers) to learn how to implement them.
+
+- **Minimal** ([sample](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/controllers/minimal.js)): You only create one file who takes as name, the name of the controller you want to create. Then you define inside, the routing definition and the functions. This method is recommended if you plan to have a small controller with few actions.
+- **Structured** ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/users)) : You create a new directory with the name of the controller. Inside, you create:<br>
+    - `[your-controller-name].routing.js` who contains the routing definition
+    - `[your-controller-name].actions.js` Who contains the action funtions of the controller.
+    - `[your-controller-name].spec.js` This one is optional
+
+If your controller is pretty heavy, with a lot of functions, we recommand to create one file per action (create-user.action.js, get-user.action.js etc… ) ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars))
 
 
 ## 🤙 EXAMPLES
