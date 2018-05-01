@@ -10,26 +10,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac augue sit amet 
 
 ## 💾 INSTALLATION
 ```bash
-npm install express-controllers-loader
+npm install -S ecla
 ```
 ## 🔩 HOW IT WORKS
-**Express-controllers-loader** goes through the files and folders inside your controllers directory to find what we call "routing definitions".<br>
-Each controllers are defined in files, and exports they routing definitions [( example )](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example)<br><br>
+**Ecla** goes through the files and folders inside your controllers directory to find what we call "routing definitions".<br>
+Each controllers are defined in files, and exports their routing definitions [( example )](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example)<br><br>
 By default, we use the name of the file that exports the routing definition to name the route
 
-`/` > `controllers` > `cars.js` will create the endpoints `/users/*`<br>
-`/` > `controllers` > `admin` > `rules.js` will create the `endpoints /admin/rules/*`
+`/` > `controllers` > `cars.js` will create the endpoints `/cars/*`<br>
+`/` > `controllers` > `admin` > `rules.js` will create the endpoints `/admin/rules/*`<br>
+`/` > `controllers` > `users` > `users.routing.js` will create the endpoints `/users/*`
 
 ## ⚙️ CONFIGURATION
 ```js
 const express = require('express');
 const path = require('path');
-const eCtrl = require('express-controllers-loader');
+const ecla = require('ecla');
 const permissions = require('./permissions')
 
 const app = express();
 
-eCtrl.load(app, {
+ecla.load(app, {
     preURL: 'api',
     ignore: ['*.spec', '*.action'],
     controllers_path: path.join(__dirname, 'controllers')
@@ -76,13 +77,14 @@ project/
 
 ## 🎮 USAGE
 
-### Example: project/controllers/users.js
+### Example: project/controllers/cars.js
 
 ```js
 const postCars = require('./car-post.action');
 const getCars = require('./car-get.action');
 
 module.exports = {
+    path: 'awesome-cars', // rename the path of the route (optional)
     '/': {
         post: {
             middlewares: postCars.middlewares,
