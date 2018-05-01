@@ -1,3 +1,7 @@
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social)](http://bit.ly/2I9MurX)
+![npm](https://img.shields.io/npm/dt/express-controllers-loader.svg)
+
+
 ![alt text](https://raw.githubusercontent.com/Alex-Levacher/express-controllers-loader/master/images/Ecla-logo.png)
 
 ## 🤔 WHY ??
@@ -50,6 +54,7 @@ app.listen(3000, '127.0.0.1', () => {
 | **preURL** | `string` | `null` |Suffix your routes urls|
 | **ignore** | `string[]` | `null` |The module will not try to find a routing definition in those files.|
 | **controllers_path** | `string` | `path.join(__dirname, 'controllers')` |The path of your controllers folder.|
+| **routing_files** | `string` | `*.routing` |How you want to name routing files.|
 | **permissions** | `function` | `null` |A function that takes in parameter a **level access** and returns an [**express middleware**](https://expressjs.com/en/guide/using-middleware.html). This is useful if you want to restrict access for some urls. With this option enabled, you will be able to set in each route configuration an option level that will be passed to your permission function. See below to view who to implement it. [( example )](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/permissions.js)|
 
 ## 🌲FILE STRUCTURE
@@ -125,10 +130,14 @@ There is **2** common way to create a controller with ECL, you can take a look [
     - `[your-controller-name].actions.js` Who contains the action funtions of the controller.
     - `[your-controller-name].spec.js` This one is optional
 
-If your controller is pretty heavy, with a lot of functions, we recommand to create one file per action (create-user.action.js, get-user.action.js etc… ) ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars))
+If your controller is pretty heavy, with a lot of functions, we recommand to create one file per action (`create-user.action.js`, `get-user.action.js`, etc… ) ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars))
 
 
 ## 🤙 EXAMPLES
+ - [Simple Ecla project](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example)
+ - [Simple controller](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/controllers/minimal.js)
+ - [Structured controller](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/users)
+ - [Scalable structured controller](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars)
 
 ## 🚀 ROADMAP
 Here is the next features planed, let me know if you have some ideas 
@@ -136,6 +145,7 @@ Here is the next features planed, let me know if you have some ideas
 * Create a CLI to generate new controllers / projects 
 
 ## ☕️ SUPPORT
+
 
 ## ⚖️ LICENSE
 This software is licensed under the MIT © AlexLevacher
