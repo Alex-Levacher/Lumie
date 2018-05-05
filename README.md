@@ -145,7 +145,7 @@ Here is the next features planed, let me know if you have some ideas
 * Create a CLI to generate new controllers / projects 
 
 ## ☕️ SUPPORT
-
+<a href="https://www.buymeacoffee.com/AlexLevacher" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## ⚖️ LICENSE
 This software is licensed under the MIT © AlexLevacher
