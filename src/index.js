@@ -85,7 +85,7 @@ module.exports.load = function (app, options = {}) {
         ignore: validators.ignore,
         preURL: validators.preURL,
         permissions: validators.permissions,
-        routingFiles: validators.routingFiles
+        routing_files: validators.routingFiles
     };
 
     for (const key in initOptionsFcts) {
