@@ -2,15 +2,15 @@
 ![npm](https://img.shields.io/npm/dt/express-controllers-loader.svg)
 
 
-![alt text](https://raw.githubusercontent.com/Alex-Levacher/express-controllers-loader/master/images/Ecla-logo.png)
+![alt text](https://raw.githubusercontent.com/Alex-Levacher/Ecla/master/images/Ecla-logo.png)
 
 ## 🤔 WHY ??
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac augue sit amet dolor rutrum tristique non non ante. Donec eget iaculis ante. Nullam tempor vulputate ullamcorper. Sed nisl justo, dignissim a lacinia et, tempus at risus. Suspendisse vel lorem id sapien volutpat fringilla a in turpis.
 
 ✅ Maintenable<br>
 ✅ Scalable<br>
-✅ Easy setup<br>
-✅ Tests made Easy<br>
+✅ Quick setup<br>
+✅ Easily testable<br>
 
 ## 💾 INSTALLATION
 ```bash
@@ -18,7 +18,7 @@ npm install -S ecla
 ```
 ## 🔩 HOW IT WORKS
 **Ecla** goes through the files and folders inside your controllers directory to find what we call "routing definitions".<br>
-Each controllers are defined in files, and exports their routing definitions [( example )](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example)<br><br>
+Each controllers are defined in files, who export their routing definitions [( example )](https://github.com/Alex-Levacher/Ecla/tree/master/example)<br><br>
 By default, we use the name of the file that exports the routing definition to name the route
 
 `/` > `controllers` > `cars.js` will create the endpoints `/cars/*`<br>
@@ -55,7 +55,7 @@ app.listen(3000, '127.0.0.1', () => {
 | **ignore** | `string[]` | `null` |The module will not try to find a routing definition in those files.|
 | **controllers_path** | `string` | `path.join(__dirname, 'controllers')` |The path of your controllers folder.|
 | **routing_files** | `string` | `*.routing` |How you want to name routing files.|
-| **permissions** | `function` | `null` |A function that takes in parameter a **level access** and returns an [**express middleware**](https://expressjs.com/en/guide/using-middleware.html). This is useful if you want to restrict access for some urls. With this option enabled, you will be able to set in each route configuration an option level that will be passed to your permission function. See below to view who to implement it. [( example )](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/permissions.js)|
+| **permissions** | `function` | `null` |A function that takes in parameter a **level access** and returns an [**express middleware**](https://expressjs.com/en/guide/using-middleware.html). This is useful if you want to restrict access for some urls. With this option enabled, you will be able to set in each route configuration an option level that will be passed to your permission function. See below to view who to implement it. [( example )](https://github.com/Alex-Levacher/Ecla/blob/master/example/permissions.js)|
 
 ## 🌲FILE STRUCTURE
 ```txt
@@ -77,7 +77,7 @@ project/
 └── package.json
 ```
 
-![alt text](https://raw.githubusercontent.com/Alex-Levacher/express-controllers-loader/master/images/preview-run.png)
+![alt text](https://raw.githubusercontent.com/Alex-Levacher/Ecla/master/images/preview-run.png)
 
 
 ## 🎮 USAGE
@@ -122,22 +122,22 @@ module.exports = {
 ```
 
 ## 🌠 BEST PRACTICES
-There is **2** common way to create a controller with ECL, you can take a look [here](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers) to learn how to implement them.
+There is **2** common way to create a controller with ECL, you can take a look [here](https://github.com/Alex-Levacher/Ecla/blob/master/example/controllers) to learn how to implement them.
 
-- **Minimal** ([sample](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/controllers/minimal.js)): You only create one file who takes as name, the name of the controller you want to create. Then you define inside, the routing definition and the functions. This method is recommended if you plan to have a small controller with few actions.
-- **Structured** ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/users)) : You create a new directory with the name of the controller. Inside, you create:<br>
+- **Minimal** ([sample](https://github.com/Alex-Levacher/Ecla/blob/master/example/controllers/simple-ctrl.js)): You only create one file who takes as name, the name of the controller you want to create. Then you define inside, the routing definition and the functions. This method is recommended if you plan to have a small controller with few actions.
+- **Structured** ([sample](https://github.com/Alex-Levacher/Ecla/tree/master/example/controllers/users)) : You create a new directory with the name of the controller. Inside, you create:<br>
     - `[your-controller-name].routing.js` who contains the routing definition
     - `[your-controller-name].actions.js` Who contains the action funtions of the controller.
     - `[your-controller-name].spec.js` This one is optional
 
-If your controller is pretty heavy, with a lot of functions, we recommand to create one file per action (`create-user.action.js`, `get-user.action.js`, etc… ) ([sample](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars))
+If your controller is pretty heavy, with a lot of functions, we recommand to create one file per action (`create-user.action.js`, `get-user.action.js`, etc… ) ([sample](https://github.com/Alex-Levacher/Ecla/tree/master/example/controllers/cars))
 
 
 ## 🤙 EXAMPLES
- - [Simple Ecla project](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example)
- - [Simple controller](https://github.com/Alex-Levacher/express-controllers-loader/blob/master/example/controllers/minimal.js)
- - [Structured controller](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/users)
- - [Scalable structured controller](https://github.com/Alex-Levacher/express-controllers-loader/tree/master/example/controllers/cars)
+ - [Simple Ecla project](https://github.com/Alex-Levacher/Ecla/tree/master/example)
+ - [Simple controller](https://github.com/Alex-Levacher/Ecla/blob/master/example/controllers/simple-ctrl.js)
+ - [Structured controller](https://github.com/Alex-Levacher/Ecla/tree/master/example/controllers/users)
+ - [Scalable structured controller](https://github.com/Alex-Levacher/Ecla/tree/master/example/controllers/cars)
 
 ## 🚀 ROADMAP
 Here is the next features planed, let me know if you have some ideas 
