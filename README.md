@@ -5,7 +5,7 @@
 ![alt text](https://raw.githubusercontent.com/Alex-Levacher/Ecla/master/images/Ecla-logo.png)
 
 ## 🤔 WHY ??
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac augue sit amet dolor rutrum tristique non non ante. Donec eget iaculis ante. Nullam tempor vulputate ullamcorper. Sed nisl justo, dignissim a lacinia et, tempus at risus. Suspendisse vel lorem id sapien volutpat fringilla a in turpis.
+Ecla is a lightweight module that allows you to set up a scalable controllers architecture for your nodejs project. 
 
 ✅ Maintenable<br>
 ✅ Scalable<br>
@@ -145,6 +145,7 @@ Here is the next features planed, let me know if you have some ideas
 * Create a CLI to generate new controllers / projects 
 
 ## ☕️ SUPPORT
+If you are struggling to setup Ecla, you found a bug or if you have some improvement ideas, feel free to [create an issue](https://github.com/Alex-Levacher/Ecla/issues)<br><br>
 <a href="https://www.buymeacoffee.com/AlexLevacher" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## ⚖️ LICENSE
