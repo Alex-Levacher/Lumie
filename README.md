@@ -139,8 +139,8 @@ If your controller is pretty heavy, with a lot of functions, we recommend to cre
 
 * [Simple Lumie project](https://github.com/Alex-Levacher/Lumie/tree/master/example)
 * [Simple controller](https://github.com/Alex-Levacher/Lumie/blob/master/example/controllers/simple-ctrl.js)
-* [Structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/users)
-* [Scalable structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/cars)
+* [Structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/user)
+* [Scalable structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/car)
 
 ## 🚀 ROADMAP
 
