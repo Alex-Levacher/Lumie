@@ -62,6 +62,12 @@ test('preURL should pass', (t) => {
     t.pass();
 });
 
+test('preURL should be / when not defined', (t) => {
+    const options = {};
+    validators.preURL(undefined, options);
+    t.is(options.preURL, '/');
+});
+
 test('permissions should fail with incorrect value', (t) => {
     const error = t.throws(() => {
         validators.permissions([], {});

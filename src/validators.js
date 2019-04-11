@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// REQUIRED
 function ctrlsPath(value, options) {
     if (!value || typeof value !== 'string') {
         throw new Error('Expected a controllers path in options to be a string');
@@ -8,7 +9,7 @@ function ctrlsPath(value, options) {
     options.controllersPath = value;
 }
 
-function verbose(value, options) {
+function verbose(value = false, options) {
     if (value && typeof value !== 'boolean') {
         throw new Error('Expected verbose to be a boolean');
     }
@@ -22,7 +23,7 @@ function ignore(value, options) {
     options.ignore = value;
 }
 
-function preURL(value, options) {
+function preURL(value = '/', options) {
     if (value && typeof value !== 'string') {
         throw new Error('Expected preURL to be a string');
     }
