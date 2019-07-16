@@ -1,4 +1,4 @@
-const { create, getOne, getAll } = require('./user.action');
+const { create, getOne, getAll } = require('./users.action');
 
 module.exports = {
     '/': {

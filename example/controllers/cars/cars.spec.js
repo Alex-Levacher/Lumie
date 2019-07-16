@@ -4,7 +4,7 @@ const app = require('../../app');
 
 test('[POST] /car should pass', async (t) => {
     const { body, status } = await request(app)
-    .post('/api/car')
+    .post('/api/cars')
     .send({})
     .set('Accept', 'application/json');
 
@@ -14,7 +14,7 @@ test('[POST] /car should pass', async (t) => {
 
 test('[GET] /car should pass', async (t) => {
     const { body, status } = await request(app)
-    .get('/api/car')
+    .get('/api/cars')
     .set('Accept', 'application/json');
 
     t.is(body.length, 2);
@@ -23,7 +23,7 @@ test('[GET] /car should pass', async (t) => {
 
 test('[GET] /car/:id should pass', async (t) => {
     const { body, status } = await request(app)
-    .get('/api/car/lambo')
+    .get('/api/cars/lambo')
     .set('Accept', 'application/json');
 
     t.is(body.brand, 'lamborghini');

@@ -4,7 +4,7 @@ const app = require('../../app');
 
 test('[POST] /user should pass', async (t) => {
     const { body, status } = await request(app)
-    .post('/api/user')
+    .post('/api/users')
     .send({})
     .set('Accept', 'application/json');
 
@@ -14,7 +14,7 @@ test('[POST] /user should pass', async (t) => {
 
 test('[GET] /user should pass', async (t) => {
     const { body, status } = await request(app)
-    .get('/api/user')
+    .get('/api/users')
     .set('Accept', 'application/json');
 
     t.is(body.length, 3);
@@ -23,7 +23,7 @@ test('[GET] /user should pass', async (t) => {
 
 test('[GET] /user/:id should pass', async (t) => {
     const { body, status } = await request(app)
-    .get('/api/user/1')
+    .get('/api/users/1')
     .set('Accept', 'application/json');
 
     t.is(body.name, 'Alex');
