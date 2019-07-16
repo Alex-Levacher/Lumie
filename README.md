@@ -65,15 +65,15 @@ const server = app.listen(3000, "127.0.0.1", () => {
 ```txt
 project/
 ├── controllers/
-│   ├── user/
-│   │   ├── user.routing.js
-│   │   ├── user.action.js
-│   │   └── user.spec.js
-│   ├── car/
-│   │   ├── car.routing.js
-│   │   ├── car.spec.js
-|   |   ├── car-get.action.js
-│   │   └── car-post.action.js
+│   ├── users/
+│   │   ├── users.routing.js
+│   │   ├── users.action.js
+│   │   └── users.spec.js
+│   ├── cars/
+│   │   ├── cars.routing.js
+│   │   ├── cars.spec.js
+|   |   ├── cars-get.action.js
+│   │   └── cars-post.action.js
 │   └── simple-ctrl.js
 ├── core/
 │   └── permissions.js
@@ -88,8 +88,8 @@ project/
 ### Example: project/controllers/cars.js
 
 ```js
-const postCars = require("./car-post.action");
-const getCars = require("./car-get.action");
+const postCars = require("./cars-post.action");
+const getCars = require("./cars-get.action");
 
 module.exports = {
   path: "awesome-cars", // rename the path of the route (optional)
@@ -128,19 +128,19 @@ module.exports = {
 There is **2** common way to create a controller with Lumie, you can take a look [here](https://github.com/Alex-Levacher/Lumie/blob/master/example/controllers) to learn how to implement them.
 
 * **Minimal** ([sample](https://github.com/Alex-Levacher/Lumie/blob/master/example/controllers/simple-ctrl.js)): You only create one file which takes as name, the name of the controller you want to create. Then you define the routing definition and the functions. This method is recommended if you plan to have a small controller with few actions.
-* **Structured** ([sample](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/user)): You create a new directory with the name of the controller. Inside, you create:<br>
+* **Structured** ([sample](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/users)): You create a new directory with the name of the controller. Inside, you create:<br>
   * `[your-controller-name].routing.js` which contains the routing definition
   * `[your-controller-name].actions.js` which contains the action functions of the controller.
   * `[your-controller-name].spec.js` This one is optional
 
-If your controller is pretty heavy, with a lot of functions, we recommend to create one file per action (`create-user.action.js`, `get-user.action.js`, etc… ) ([sample](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/car))
+If your controller is pretty heavy, with a lot of functions, we recommend to create one file per action (`create-user.action.js`, `get-user.action.js`, etc… ) ([sample](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/cars))
 
 ## 🤙 EXAMPLES
 
 * [Simple Lumie project](https://github.com/Alex-Levacher/Lumie/tree/master/example)
 * [Simple controller](https://github.com/Alex-Levacher/Lumie/blob/master/example/controllers/simple-ctrl.js)
-* [Structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/user)
-* [Scalable structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/car)
+* [Structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/users)
+* [Scalable structured controller](https://github.com/Alex-Levacher/Lumie/tree/master/example/controllers/cars)
 
 ## 🚀 ROADMAP
 
@@ -151,11 +151,10 @@ Here are the next features planned, let me know if you have some ideas
 ## ☕️ SUPPORT
 You can support the project by
 * Star our GitHub repo ⭐️
-* [Suggest ideas](https://github.com/Alex-Levacher/Lumie/issues/3) to help me promote Lumie 🌎
-* Support Lumie on [IH](https://www.indiehackers.com/forum/show-ih-an-opinionated-npm-module-to-create-better-apps-and-ship-faster-86cf3010ad) & [echoJS](http://www.echojs.com/news/27102)
+* [Suggest ideas](https://github.com/Alex-Levacher/Lumie/issues) to help me promote Lumie 🌎
 
 If you are struggling to setup Lumie, you found a bug or if you have some improvement ideas, feel free to [create an issue](https://github.com/Alex-Levacher/Lumie/issues)<br><br>
-<a href="https://www.buymeacoffee.com/AlexLevacher" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 
 ## ⚖️ LICENSE
 
