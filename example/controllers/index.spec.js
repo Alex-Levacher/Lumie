@@ -8,5 +8,5 @@ test('[GET] / pass', async (t) => {
     .set('Accept', 'application/json');
 
     t.is(status, 200);
-    t.is(body.msg, 'I am an exemple of route with the path option');
+    t.is(body.msg, 'I am an example of route with the path option');
 });
