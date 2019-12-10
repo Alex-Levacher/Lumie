@@ -11,20 +11,18 @@ const _routes = {};
 const _options = {};
 
 function browseControllerObject(ctrlDefinition, path) {
-    let routeSlug = null;
-
     const keyName = path.split('/')
     .filter(item => (item && item !== _options.preURL))
     .map(item => capitalize(item))
     .join(' > ');
 
     _routes[keyName] = {};
+    if (ctrlDefinition.path) delete ctrlDefinition.path;
     for (const actionName in ctrlDefinition) {
-        if (actionName === 'path') break;
         const action = ctrlDefinition[actionName];
         for (const verbName in action) {
-            routeSlug = cpath.join(verbName, path, actionName);
-            _routes[keyName][routeSlug] = new Route({
+            const routeID = cpath.join(verbName, path, actionName);
+            _routes[keyName][routeID] = new Route({
                 verb: verbName,
                 action: action[verbName].action,
                 level: action[verbName].level,
