@@ -1,24 +1,53 @@
 {
-    "extends": "airbnb-base",
+    "root": true,
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts"]
+            }
+        }
+    },
+    "parser": "@typescript-eslint/parser",
     "plugins": [
-        "import"
+        "import",
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:import/typescript"
     ],
     "rules": {
-        "comma-dangle": ["error", {
-            "arrays": "never",
-            "objects": "never",
-            "imports": "always",
-            "exports": "always",
-            "functions": "ignore"
-        }],
-        "func-names": "off",
-        "guard-for-in": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-member-accessibility": "off",
+        "@typescript-eslint/indent": ["error", 4, { "MemberExpression": 0 }],
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/no-parameter-properties": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "arrow-parens": ["error","as-needed"],
+        "camelcase": "off",
+        "global-require": "off",
+        "import/extensions": "off",
         "import/no-dynamic-require": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
         "indent": ["error", 4, { "MemberExpression": 0 }],
-        "no-param-reassign": ["error", {
-            "props": false
-        }],
-        "no-restricted-syntax": "off",
-        "no-underscore-dangle": "off"
+        "max-len": ["error", { "code": 120 }],
+        "no-console": "warn",
+        "no-empty-function": "off",
+        "no-nested-ternary": "off",
+        "no-underscore-dangle": "off",
+        "no-useless-constructor": "off",
+        "object-curly-newline": "off",
+        "semi": "error"
     }
 }
