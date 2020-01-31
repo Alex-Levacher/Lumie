@@ -4,12 +4,9 @@
     "description": "Make a dazzling node API",
     "main": "src/index.js",
     "scripts": {
+        "test": "ava",
         "start": "npm start --prefix example",
-        "test:src": "nyc ava -v",
-        "test:example": "npm test --prefix example",
-        "test": "npm run test:src && npm run test:example",
-        "lint": "eslint src/",
-        "ava": "ava"
+        "lint": "eslint src/"
     },
     "repository": {
         "type": "git",
@@ -30,30 +27,39 @@
     },
     "license": "MIT",
     "dependencies": {
-        "micromatch": "^3.1.10"
+        "chalk": "^3.0.0",
+        "lodash": "^4.17.15",
+        "micromatch": "^4.0.2"
     },
     "devDependencies": {
-        "ava": "^0.25.0",
-        "eslint": "^4.19.1",
-        "eslint-config-airbnb-base": "^12.1.0",
-        "eslint-plugin-import": "^2.11.0",
-        "nyc": "^12.0.2",
-        "pre-commit": "^1.2.2",
-        "sinon": "^6.0.0"
+        "@types/express": "^4.17.2",
+        "@types/lodash": "^4.14.149",
+        "@types/micromatch": "^4.0.0",
+        "@types/sinon": "^7.5.1",
+        "@typescript-eslint/eslint-plugin": "^2.17.0",
+        "@typescript-eslint/parser": "^2.17.0",
+        "ava": "^3.1.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.20.0",
+        "eslint": "^6.8.0",
+        "sinon": "^8.1.1",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.7.5"
     },
     "ava": {
         "files": [
-            "test/**/*.spec.js"
+            "test/**/*.spec.ts"
         ],
         "source": [
-            "src/**/*.js"
+            "src/**/*.ts"
+        ],
+        "extensions": [
+            "ts"
+        ],
+        "require": [
+            "ts-node/register"
         ],
         "verbose": true,
-        "concurrency": 1
-    },
-    "pre-commit": [
-        "lint",
-        "test:src",
-        "test:example"
-    ]
+        "concurrency": 2
+    }
 }
