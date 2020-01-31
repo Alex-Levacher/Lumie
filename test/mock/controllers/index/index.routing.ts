@@ -1,16 +1,16 @@
-import { actionMethod } from '../../browsing.spec';
+import { basicActionMethod } from '../../actionMethod';
 
 export = {
     rewriteRessource: '',
     '/': {
         get: {
-            action: actionMethod,
+            action: basicActionMethod,
             level: 'public',
         },
     },
     '/:project(apple|banana)': {
         get: {
-            action: actionMethod,
+            action: basicActionMethod,
             level: 'public',
         },
     },

@@ -25,7 +25,7 @@ export interface LumieConfig extends LumieOptions {
     verbose: boolean;
     directoryPath: string;
     routingFiles: string;
-    logger: Function;
+    logger: any;
 }
 
 export interface RoutingDefinition {
@@ -38,7 +38,7 @@ export interface RoutingDefinition {
     filenameWithoutExtention: string;
 }
 
-interface RoutingFile {
+export interface RoutingFile {
     ressource: string;
     filenameWithoutExtention: string;
     sourcePath: string;
@@ -124,7 +124,7 @@ export function browseRoutingFiles(routingFiles: RoutingFile[]): RoutingDefiniti
     return routingDefinitions;
 }
 
-function logRoutingDefinitions(routingDefinitions: RoutingDefinition[], config: LumieConfig) {
+export function logRoutingDefinitions(routingDefinitions: RoutingDefinition[], config: LumieConfig) {
     config.logger('=== LUMIE ROUTING ===');
     const groupedRoutingDefinitions = groupBy(routingDefinitions, 'ressource');
 

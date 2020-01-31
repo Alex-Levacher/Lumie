@@ -1,19 +1,19 @@
-import { actionMethod } from '../../browsing.spec';
+import { basicActionMethod } from '../../actionMethod';
 
 export = {
     '/': {
         post: {
-            action: actionMethod,
+            action: basicActionMethod,
             level: 'public',
         },
         get: {
-            action: actionMethod,
+            action: basicActionMethod,
             level: 'public',
         },
     },
     '/:id': {
         get: {
-            action: actionMethod,
+            action: basicActionMethod,
             level: 'public',
         },
     },
