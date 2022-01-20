@@ -14,7 +14,8 @@ module.exports = {
     '/:id': {
         get: {
             action: getOne,
-            level: 'public'
+            level: 'public',
+            comment: "This is a comment"
         }
     }
 };

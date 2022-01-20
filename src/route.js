@@ -8,6 +8,7 @@ class Route {
         this.path = options.path;
         this.permissions = options.permissions;
         this.middlewares = options.middlewares || [];
+        this.comment = options.comment || '';
     }
 
     create(app) {
@@ -24,7 +25,7 @@ class Route {
     }
 
     desc() {
-        return `\t${this.level}\t${this.verb}\t[${joinPathSlash(this.path)}]`;
+        return `\t${this.level}\t${this.verb}\t[${joinPathSlash(this.path)}]\t${this.comment}`;
     }
 }
 
