@@ -49,9 +49,10 @@ test('desc should work', (t) => {
         level: 'public',
         path: '/test/',
         permissions: level => level,
-        middlewares: undefined
+        middlewares: undefined,
+        comment: 'This is a comment'
     };
     const route = new Route(prepareRoute);
     const desc = route.desc();
-    t.is(desc, '\tpublic\tget\t[/test/]');
+    t.is(desc, '\tpublic\tget\t[/test/]\tThis is a comment');
 });

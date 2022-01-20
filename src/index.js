@@ -28,7 +28,8 @@ function browseControllerObject(ctrlDefinition, path) {
                 level: action[verbName].level,
                 path: cpath.join(path, actionName),
                 permissions: _options.permissions,
-                middlewares: action[verbName].middlewares
+                middlewares: action[verbName].middlewares,
+                comment: action[verbName].comment
             });
         }
     }
